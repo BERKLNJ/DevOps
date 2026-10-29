@@ -1,4 +1,4 @@
-# Сервис задач DemoApi — Task Service REST API
+# Task Service REST API
 
 Учебный REST API сервис управления проектами и задачами по курсу **«Инструменты DevOps»** (.NET 10, ASP.NET Core, PostgreSQL 18, Docker, Docker Compose, Prometheus).
 
