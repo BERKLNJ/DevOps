@@ -87,4 +87,30 @@ public class ProjectsApiTests(WebApplicationFactory<Program> factory)
         Assert.Equal(0, stats.Done);
         Assert.Equal(1, stats.Overdue);
     }
+
+    [Fact]
+    public async Task Rename_ReturnsOk()
+    {
+        var project = await _client.CreateProjectAsync();
+        var newName = TestApi.Unique("renamed");
+
+        var response = await _client.PutAsJsonAsync($"/api/projects/{project.Id}", new { name = newName });
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        var updated = await response.Content.ReadFromJsonAsync<Project>(TestApi.Json);
+        Assert.NotNull(updated);
+        Assert.Equal(project.Id, updated.Id);
+        Assert.Equal(newName, updated.Name);
+    }
+
+    [Fact]
+    public async Task Rename_DuplicateName_ReturnsConflict()
+    {
+        var existing = await _client.CreateProjectAsync();
+        var target = await _client.CreateProjectAsync();
+
+        var response = await _client.PutAsJsonAsync($"/api/projects/{target.Id}", new { name = existing.Name });
+
+        Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
+    }
 }
