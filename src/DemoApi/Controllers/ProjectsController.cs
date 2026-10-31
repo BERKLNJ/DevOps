@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using DemoApi.Domain;
 using DemoApi.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -79,6 +79,7 @@ public sealed class ProjectsController(ProjectService projects) : ControllerBase
     /// <response code="400">Название пустое или длиннее 100 символов</response>
     /// <response code="404">Проекта с таким id нет</response>
     /// <response code="409">Проект с таким названием уже есть</response>
+    // PUT /api/projects/{id}: переименование проекта (п. 8)
     [HttpPut("{id:int}")]
     [ProducesResponseType<Project>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
