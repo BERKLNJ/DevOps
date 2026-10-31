@@ -1,27 +1,27 @@
-# Сервис задач DemoApi — Task Service REST API
+# Сервис задач DemoApi (DevOps)
 
 Учебный REST API сервис управления проектами и задачами по курсу **«Инструменты DevOps»** (.NET 10, ASP.NET Core, PostgreSQL 18, Docker, Docker Compose, Prometheus).
 
 ## Основные эндпоинты сервиса
 
-| Метод и маршрут | Назначение |
-|---|---|
-| `GET /` | Информация о сервисе, версии (`APP_VERSION`) и имени хоста/контейнера |
-| `GET /api/projects` | Список всех проектов |
-| `GET /api/projects/{id}` | Получение проекта по идентификатору |
-| `POST /api/projects` | Создание нового проекта (`400` при пустом имени, `409` при дубликате) |
-| `PUT /api/projects/{id}` | Переименование проекта (`200 OK`, `400 Bad Request`, `404 Not Found`, `409 Conflict`) |
-| `DELETE /api/projects/{id}` | Удаление проекта вместе с его задачами |
-| `GET /api/projects/{id}/stats` | Статистика по задачам проекта (`total`, `todo`, `inProgress`, `done`, `overdue`) |
-| `GET /api/tasks` | Список задач с фильтрацией по `?projectId=` и `&status=` |
-| `GET /api/tasks/{id}` | Получение задачи по идентификатору |
-| `POST /api/tasks` | Создание новой задачи в проекте (начальный статус `Todo`) |
-| `PUT /api/tasks/{id}` | Обновление названия, описания и срока задачи |
-| `PATCH /api/tasks/{id}/status` | Смена статуса задачи (`Todo -> InProgress -> Done` и на шаг назад) |
-| `DELETE /api/tasks/{id}` | Удаление задачи |
-| `GET /health/live` | Liveness-проверка жизнеспособности процесса |
-| `GET /health/ready` | Readiness-проверка готовности сервиса и доступности БД PostgreSQL |
-| `GET /metrics` | Метрики в формате Prometheus |
+| Метод и маршрут                | Назначение                                                                            |
+| ------------------------------ | ------------------------------------------------------------------------------------- |
+| `GET /`                        | Информация о сервисе, версии (`APP_VERSION`) и имени хоста/контейнера                 |
+| `GET /api/projects`            | Список всех проектов                                                                  |
+| `GET /api/projects/{id}`       | Получение проекта по идентификатору                                                   |
+| `POST /api/projects`           | Создание нового проекта (`400` при пустом имени, `409` при дубликате)                 |
+| `PUT /api/projects/{id}`       | Переименование проекта (`200 OK`, `400 Bad Request`, `404 Not Found`, `409 Conflict`) |
+| `DELETE /api/projects/{id}`    | Удаление проекта вместе с его задачами                                                |
+| `GET /api/projects/{id}/stats` | Статистика по задачам проекта (`total`, `todo`, `inProgress`, `done`, `overdue`)      |
+| `GET /api/tasks`               | Список задач с фильтрацией по `?projectId=` и `&status=`                              |
+| `GET /api/tasks/{id}`          | Получение задачи по идентификатору                                                    |
+| `POST /api/tasks`              | Создание новой задачи в проекте (начальный статус `Todo`)                             |
+| `PUT /api/tasks/{id}`          | Обновление названия, описания и срока задачи                                          |
+| `PATCH /api/tasks/{id}/status` | Смена статуса задачи (`Todo -> InProgress -> Done` и на шаг назад)                    |
+| `DELETE /api/tasks/{id}`       | Удаление задачи                                                                       |
+| `GET /health/live`             | Liveness-проверка жизнеспособности процесса                                           |
+| `GET /health/ready`            | Readiness-проверка готовности сервиса и доступности БД PostgreSQL                     |
+| `GET /metrics`                 | Метрики в формате Prometheus                                                          |
 
 ---
 
@@ -41,6 +41,7 @@
    irm http://localhost:8080/api/projects
    ```
 4. Остановка контейнеров:
+
    ```powershell
    # Остановка с сохранением данных БД в томе pgdata
    docker compose down
